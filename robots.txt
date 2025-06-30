@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Allow: /service.xml
-
-Sitemap: https://www.clinamenic.com/sitemap.xml 

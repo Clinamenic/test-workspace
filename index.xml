@@ -2,69 +2,15 @@
 <rss version="2.0">
     <channel>
       <title>Digital Garden</title>
-      <link>https://https://www.example.com</link>
+      <link>https://</link>
       <description>Last 10 notes on Digital Garden</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>test2</title>
-    <link>https://https://www.example.com/test2</link>
-    <guid>https://https://www.example.com/test2</guid>
-    <description>Curated collection of resources</description>
-    <pubDate>Tue, 24 Jun 2025 22:12:16 GMT</pubDate>
-  </item><item>
-    <title>neumorphism</title>
-    <link>https://https://www.example.com/neurmorphism</link>
-    <guid>https://https://www.example.com/neurmorphism</guid>
-    <description>Curated collection of resources</description>
-    <pubDate>Tue, 24 Jun 2025 21:54:04 GMT</pubDate>
-  </item><item>
-    <title>Test Collation</title>
-    <link>https://https://www.example.com/Test-Collation</link>
-    <guid>https://https://www.example.com/Test-Collation</guid>
-    <description>Curated collection of resources</description>
-    <pubDate>Tue, 24 Jun 2025 21:43:42 GMT</pubDate>
-  </item><item>
-    <title>Retrospective: Ethereum Localism Knowledge Garden</title>
-    <link>https://https://www.example.com/resources/Retrospective-on-Ethereum-Localism-Knowledge-Garden</link>
-    <guid>https://https://www.example.com/resources/Retrospective-on-Ethereum-Localism-Knowledge-Garden</guid>
-    <description>Background Ethereum Localism is a nascent, niche subculture at the intersection of blockchain and grassroots organizing.</description>
-    <pubDate>Thu, 05 Jun 2025 07:00:00 GMT</pubDate>
-  </item><item>
-    <title>r-LW-TLP-12</title>
-    <link>https://https://www.example.com/zettelgarten/r/r-LW-TLP-12</link>
-    <guid>https://https://www.example.com/zettelgarten/r/r-LW-TLP-12</guid>
-    <description>Transclude of Tractatus-Logico-Philosophicus#4041 The state of affairs cannot be apprehended beyond the depiction itself, which itself is only an approximation of what it depicts.</description>
-    <pubDate>Tue, 03 Jun 2025 07:00:00 GMT</pubDate>
-  </item><item>
-    <title>r-LW-TLP-19</title>
-    <link>https://https://www.example.com/zettelgarten/r/r-LW-TLP-19</link>
-    <guid>https://https://www.example.com/zettelgarten/r/r-LW-TLP-19</guid>
-    <description>Tractatus Logico-Philosophicus Reflection: Now having finished the initial linearized reading of the Tractatus, and having securing as broad sense of its scope, it strikes me as a good time to reflect upon my present comprehension of the work.</description>
-    <pubDate>Tue, 03 Jun 2025 07:00:00 GMT</pubDate>
-  </item><item>
-    <title>Structured Services</title>
-    <link>https://https://www.example.com/resources/Structured-Services</link>
-    <guid>https://https://www.example.com/resources/Structured-Services</guid>
-    <description> .</description>
-    <pubDate>Sun, 01 Jun 2025 16:21:31 GMT</pubDate>
-  </item><item>
-    <title>Tractatus Logico-Philosophicus</title>
-    <link>https://https://www.example.com/resources/texts/Tractatus-Logico-Philosophicus</link>
-    <guid>https://https://www.example.com/resources/texts/Tractatus-Logico-Philosophicus</guid>
-    <description> .center &gt; article.popover-hint &gt; h1, .center &gt; article.popover-hint &gt; h2, .center &gt; article.popover-hint &gt; h3, .center &gt; article.popover-hint &gt; h4, .center &gt; article.popover-hint &gt; h5, .center &gt; article.popover-hint &gt; h6, .center &gt; .popover-hint &gt; article &...</description>
-    <pubDate>Wed, 28 May 2025 20:04:59 GMT</pubDate>
-  </item><item>
-    <title>Note Hub on Wittgenstein&#039;s Tractatus</title>
-    <link>https://https://www.example.com/zettelgarten/r/r-LW-TLP-Hub</link>
-    <guid>https://https://www.example.com/zettelgarten/r/r-LW-TLP-Hub</guid>
-    <description>Asking the Right Questions 3.325 4.003 4.1274 Limits of Language 3.332 4.041 4.1274 5.61 Affordances for Emergence 3.4 Logical Atomism 5.32 Unclear 3.333 4.0411 4.27 4.42 5.525 5.5542 6.51 Key Excerpts 3.325 4.003 4.25 4.464 5.52 5.525 5.535 6.1222 6.124 6.35 .</description>
-    <pubDate>Wed, 28 May 2025 19:36:24 GMT</pubDate>
-  </item><item>
-    <title>Reflections on Applied Auto-Didactic Methodology, Part 2</title>
-    <link>https://https://www.example.com/zettelgarten/DRAFT-Reflections-on-Applied-Auto-Didactic-Methodology,-Part-2</link>
-    <guid>https://https://www.example.com/zettelgarten/DRAFT-Reflections-on-Applied-Auto-Didactic-Methodology,-Part-2</guid>
-    <description></description>
-    <pubDate>Wed, 28 May 2025 07:00:00 GMT</pubDate>
+    <title>index</title>
+    <link>https:///</link>
+    <guid>https:///</guid>
+    <description>test page.</description>
+    <pubDate>Mon, 30 Jun 2025 05:24:34 GMT</pubDate>
   </item>
     </channel>
   </rss>

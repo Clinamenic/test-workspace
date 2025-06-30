@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Zettelgarten</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Digital Garden"/><meta property="og:title" content="Zettelgarten"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Zettelgarten"/><meta name="twitter:description" content=".page-listing { display: none; } .center > article.popover-hint > h1, .center > article.popover-hint > h2, .center > article.popover-hint > h3, .center > article.popover-hint > h4, .center > article.popover-hint > h5, .center > article.popover-hint > h6, .center ..."/><meta property="og:description" content=".page-listing { display: none; } .center > article.popover-hint > h1, .center > article.popover-hint > h2, .center > article.popover-hint > h3, .center > article.popover-hint > h4, .center > article.popover-hint > h5, .center > article.popover-hint > h6, .center ..."/><meta property="og:image:alt" content=".page-listing { display: none; } .center > article.popover-hint > h1, .center > article.popover-hint > h2, .center > article.popover-hint > h3, .center > article.popover-hint > h4, .center > article.popover-hint > h5, .center > article.popover-hint > h6, .center ..."/><meta property="og:image" content="https://https://www.example.com/static/og-image.png"/><meta property="og:image:url" content="https://https://www.example.com/static/og-image.png"/><meta name="twitter:image" content="https://https://www.example.com/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="https://www.example.com"/><meta property="og:url" content="https://https//www.example.com/zettelgarten"/><meta property="twitter:url" content="https://https//www.example.com/zettelgarten"/><link rel="icon" href="./static/icon.png"/><meta name="description" content=".page-listing { display: none; } .center > article.popover-hint > h1, .center > article.popover-hint > h2, .center > article.popover-hint > h3, .center > article.popover-hint > h4, .center > article.popover-hint > h5, .center > article.popover-hint > h6, .center ..."/><meta name="generator" content="Quartz"/><link href="../index.css" rel="stylesheet" type="text/css" spa-preserve/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL1VzZXJzL2dpZGVvbi9EZXNrdG9wL3Rlc3Qtd29ya3NwYWNlLy5xdWFydHovcXVhcnR6L2NvbXBvbmVudHMvc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFOztBQUlGO0VBQ0U7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmV4cGFuZC1idXR0b24ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiByaWdodDtcbiAgcGFkZGluZzogMC40cmVtO1xuICBtYXJnaW46IDAuM3JlbTtcbiAgcmlnaHQ6IDA7IC8vIE5PVEU6IHJpZ2h0IHdpbGwgYmUgc2V0IGluIG1lcm1haWQuaW5saW5lLnRzXG4gIGNvbG9yOiB2YXIoLS1ncmF5KTtcbiAgYm9yZGVyLWNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbGlnaHQpO1xuICBib3JkZXI6IDFweCBzb2xpZDtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBvcGFjaXR5OiAwO1xuICB0cmFuc2l0aW9uOiAwLjJzO1xuXG4gICYgPiBzdmcge1xuICAgIGZpbGw6IHZhcigtLWxpZ2h0KTtcbiAgICBmaWx0ZXI6IGNvbnRyYXN0KDAuMyk7XG4gIH1cblxuICAmOmhvdmVyIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1zZWNvbmRhcnkpO1xuICB9XG5cbiAgJjpmb2N1cyB7XG4gICAgb3V0bGluZTogMDtcbiAgfVxufVxuXG5wcmUge1xuICAmOmhvdmVyID4gLmV4cGFuZC1idXR0b24ge1xuICAgIG9wYWNpdHk6IDE7XG4gICAgdHJhbnNpdGlvbjogMC4ycztcbiAgfVxufVxuXG4jbWVybWFpZC1jb250YWluZXIge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGNvbnRhaW46IGxheW91dDtcbiAgei1pbmRleDogOTk5O1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgZGlzcGxheTogbm9uZTtcbiAgYmFja2Ryb3AtZmlsdGVyOiBibHVyKDRweCk7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC41KTtcblxuICAmLmFjdGl2ZSB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB9XG5cbiAgJiA+ICNtZXJtYWlkLXNwYWNlIHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHRvcDogNTAlO1xuICAgIGxlZnQ6IDUwJTtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgICBoZWlnaHQ6IDgwdmg7XG4gICAgd2lkdGg6IDgwdnc7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcblxuICAgICYgPiAubWVybWFpZC1jb250ZW50IHtcbiAgICAgIHBhZGRpbmc6IDJyZW07XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><script src="../prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://https://www.example.com/index.xml"/></head><body data-slug="zettelgarten/index"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href=".">Digital Garden</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="list-3"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Zettelgarten</a></div></nav><h1 class="article-title">Zettelgarten</h1><p show-comma="true" class="content-meta"><time datetime="2025-04-19T19:09:26.852Z">Apr 19, 2025</time><span>8 min read</span></p></div></div><div class="popover-hint"><article class><style>
+
+.page-listing {
+  display: none;
+}
+
+.center > article.popover-hint > h1,
+.center > article.popover-hint > h2,
+.center > article.popover-hint > h3,
+.center > article.popover-hint > h4,
+.center > article.popover-hint > h5,
+.center > article.popover-hint > h6,
+.center > .popover-hint > article > h1,
+.center > .popover-hint > article > h2,
+.center > .popover-hint > article > h3,
+.center > .popover-hint > article > h4,
+.center > .popover-hint > article > h5,
+.center > .popover-hint > article > h6 {
+  background: var(--highlight);
+  border: 1px solid var(--gray);
+}
+
+</style>
+<p>This is the zettelgarten of Spencer Saar Cavanaugh, an experimental knowledge graph blending the zettelkasten method with the spirit of digital gardening. The primary purpose of this zettelgarten is to cultivate knowledge in a public manner, and to provide an auditable intellectual substrate for published discourse (see <a href="./writing" class="internal alias" data-slug="writing">Writing</a>).</p>
+<hr/>
+<h2 id="content">Content<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#content" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>This zettelgarten contains mostly reading notes, but also various long-form notes about epistemology, political science, knowledge management, and other topics.</p>
+<hr/>
+<h3 id="reading-notes">Reading Notes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reading-notes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><a href="./resources/texts/Common-Sense" class="internal alias" data-slug="resources/texts/Common-Sense">Common Sense</a> by Thomas Paine
+<ul>
+<li><a href="./zettelgarten/r/r-TP-CS-Hub" class="internal" data-slug="zettelgarten/r/r-TP-CS-Hub">r-TP-CS-Hub</a> (<a href="https://arweave.net/AaoeGtWNY91c8dnRNnpIFthgQUzUWcaiUWqNjwVVCXc" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/The-Prince" class="internal alias" data-slug="resources/texts/The-Prince">The Prince</a> by Niccolo Machiavelli
+<ul>
+<li><a href="./zettelgarten/r/r-NM-TP-Hub" class="internal" data-slug="zettelgarten/r/r-NM-TP-Hub">r-NM-TP-Hub</a> (<a href="https://arweave.net/glUJLGM3lyA-uQIkqspE2TL5NcEqJ_lXXF3MapobRdI" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/Discourses-on-Livy" class="internal alias" data-slug="resources/texts/Discourses-on-Livy">Discourses on Livy</a> by Niccolo Machiavelli
+<ul>
+<li><a href="./zettelgarten/r/r-NM-DL-Hub" class="internal" data-slug="zettelgarten/r/r-NM-DL-Hub">r-NM-DL-Hub</a> (<a href="https://arweave.net/NaIidh_-YawX9SCDndIT3KeaBuUL7pJC2i33ENokUOM" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li>The Art of War by Niccolo Machiavelli
+<ul>
+<li><a href="./zettelgarten/r/r-NM-AW-Hub" class="internal" data-slug="zettelgarten/r/r-NM-AW-Hub">r-NM-AW-Hub</a> (<a href="https://arweave.net/YWLS5SaigET0-d6aYFA_7d8XqAp20wg03yxWRjpy2yc" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li>The Road to Serfdom by Friedrich Hayek
+<ul>
+<li><a href="./zettelgarten/r/r-FH-RS-Hub" class="internal" data-slug="zettelgarten/r/r-FH-RS-Hub">r-FH-RS-Hub</a> (<a href="https://arweave.net/0y1khEq9DviaVSfnqwQTTGY8gIMDgz4ro_zEisrwtvM" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li>The Constitution of Liberty by Friedrich Hayek
+<ul>
+<li><a href="./zettelgarten/r/r-FH-CL-Hub" class="internal" data-slug="zettelgarten/r/r-FH-CL-Hub">r-FH-CL-Hub</a> (<a href="https://arweave.net/9kRKCwO-kcYIq09zw5kvUKTlkSdUsRQbAOEi0ZMGY7U" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li>The Use of Knowledge in Society by Friedrich Hayek
+<ul>
+<li><a href="./zettelgarten/r/r-FH-UK-Hub" class="internal" data-slug="zettelgarten/r/r-FH-UK-Hub">r-FH-UK-Hub</a> (<a href="https://arweave.net/AjyAAePH9onEQkOPyYjF-EPC5UnmL4-NSzHHuZKMIh4" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/Progress-and-Poverty" class="internal alias" data-slug="resources/texts/Progress-and-Poverty">Progress and Poverty</a> by Henry George
+<ul>
+<li><a href="./zettelgarten/r/r-HG-PP-Hub" class="internal" data-slug="zettelgarten/r/r-HG-PP-Hub">r-HG-PP-Hub</a> (<a href="https://arweave.net/i60F46yup0pmX5hTnQCkD9Mf6_AYXqPG9LqlUFG6dEY" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/On-the-Nature-of-Things" class="internal alias" data-slug="resources/texts/On-the-Nature-of-Things">On the Nature of Things</a> by Lucretius
+<ul>
+<li><a href="./zettelgarten/r/r-Lu-NT-Hub" class="internal" data-slug="zettelgarten/r/r-Lu-NT-Hub">r-Lu-NT-Hub</a> (<a href="https://arweave.net/iR-wBZ_M-Lx3aWQH0-OH6ilHX0CQsN1DeT94YmlG5ic" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/The-General-Theory-of-Employment,-Interest-and-Money" class="internal alias" data-slug="resources/texts/The-General-Theory-of-Employment,-Interest-and-Money">The General Theory of Employment, Interest and Money</a> by John Maynard Keynes
+<ul>
+<li><a href="./zettelgarten/r/r-JK-GT-Hub" class="internal" data-slug="zettelgarten/r/r-JK-GT-Hub">r-JK-GT-Hub</a> (<a href="https://arweave.net/H-sFwO94FGoSjV-5F13dlvJzgBmR3r6uVC9FsLRRW30" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li>Discourse on the Origin and Basis of Inequality Among Men by Jean-Jacques Rousseau
+<ul>
+<li><a href="./zettelgarten/r/r-JR-DO-Hub" class="internal" data-slug="zettelgarten/r/r-JR-DO-Hub">r-JR-DO-Hub</a> (<a href="https://arweave.net/D9ZA1bbl5yon6F782XEDUB7zV4ckLSPojhGw0whI9Fw" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/The-Federalist-Papers" class="internal alias" data-slug="resources/texts/The-Federalist-Papers">The Federalist Papers</a> by Publius
+<ul>
+<li><a href="./zettelgarten/r/r-Pu-FP-Hub" class="internal" data-slug="zettelgarten/r/r-Pu-FP-Hub">r-Pu-FP-Hub</a> (<a href="https://arweave.net/cDMlhSoeVZoL8ZdD8z-qOmzU-s9NdziOXY_5o9PKMSM" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/Tractatus-Logico-Philosophicus" class="internal alias" data-slug="resources/texts/Tractatus-Logico-Philosophicus">Tractatus Logico-Philosophicus</a></li>
+</ul>
+<hr/>
+<h3 id="canvassing">Canvassing<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#canvassing" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The following content is a discursive “canvassing” exercise intended to: process ideas and prime them for more formal publication; foreground thought processes in the spirit of auto-discourse (see <a href="./A-Primer-on-Auto-Discourse" class="internal alias" data-slug="A-Primer-on-Auto-Discourse">A Primer on Auto-Discourse</a>); garner feedback from peers; establish conceptual provenance for ideonomic archiving purposes.</p>
+<ul>
+<li><a href="./zettelgarten/Notes-on-Active-Discursive-Efforts" class="internal alias" data-slug="zettelgarten/Notes-on-Active-Discursive-Efforts">Notes on Active Discursive Efforts</a></li>
+<li><a href="./zettelgarten/Notes-on-the-Distinction-between-Theoretical-and-Applied-Governance" class="internal alias" data-slug="zettelgarten/Notes-on-the-Distinction-between-Theoretical-and-Applied-Governance">Notes on the Distinction between Theoretical and Applied Governance</a></li>
+<li><a href="./zettelgarten/Notes-on-Extitutional-Theory-and-Progressive-Protocolization" class="internal alias" data-slug="zettelgarten/Notes-on-Extitutional-Theory-and-Progressive-Protocolization">Notes on Extitutional Theory and Progressive Protocolization</a></li>
+<li><a href="./zettelgarten/Notes-on-Keynes,-Hayek,-and-Fiscal-Protocols" class="internal alias" data-slug="zettelgarten/Notes-on-Keynes,-Hayek,-and-Fiscal-Protocols">Notes on Keynes, Hayek, and Fiscal Protocols</a></li>
+<li><a href="./zettelgarten/Notes-on-Experimental-Zettelkasten-Methodology" class="internal alias" data-slug="zettelgarten/Notes-on-Experimental-Zettelkasten-Methodology">Notes on Experimental Zettelkasten Methodology</a></li>
+<li><a href="./zettelgarten/Notes-on-Methodology-for-Communities-of-Practice" class="internal alias" data-slug="zettelgarten/Notes-on-Methodology-for-Communities-of-Practice">Notes on Methodology for Communities of Practice</a></li>
+<li><a href="./zettelgarten/Notes-on-an-Ethical-Hermeneutics-of-Machiavelli" class="internal alias" data-slug="zettelgarten/Notes-on-an-Ethical-Hermeneutics-of-Machiavelli">Notes on an Ethical Hermeneutics of Machiavelli</a></li>
+<li><a href="./zettelgarten/Notes-on-Experimental-Zettelkasten-Methodology,-Part-2" class="internal alias" data-slug="zettelgarten/Notes-on-Experimental-Zettelkasten-Methodology,-Part-2">Notes on Experimental Zettelkasten Methodology, Part 2</a></li>
+<li><a href="./zettelgarten/Intimations-of-a-Post-Machiavellian-Moral-Tactical-Calculus" class="internal alias" data-slug="zettelgarten/Intimations-of-a-Post-Machiavellian-Moral-Tactical-Calculus">Intimations of a Post-Machiavellian Moral-Tactical Calculus</a></li>
+<li><a href="./zettelgarten/Considerations-on-Delegate-Agents" class="internal alias" data-slug="zettelgarten/Considerations-on-Delegate-Agents">Considerations on Delegate Agents</a></li>
+<li><a href="./zettelgarten/Intimations-of-a-Post-Machiavellian-Moral-Tactical-Calculus,-Part-2" class="internal alias" data-slug="zettelgarten/Intimations-of-a-Post-Machiavellian-Moral-Tactical-Calculus,-Part-2">Intimations of a Post-Machiavellian Moral-Tactical Calculus, Part 2</a></li>
+<li><a href="./zettelgarten/Progress-on-the-Development-of-Runique" class="internal alias" data-slug="zettelgarten/Progress-on-the-Development-of-Runique">Progress on the Development of Runique</a></li>
+</ul>
+<hr/>
+<h3 id="psychocartography-notes">Psychocartography Notes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#psychocartography-notes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The following notes were taken by hand in 2019 as an inquiry into how ideas and values can be mapped. For more information about the nature of this inquiry, see <a href="./A-Rhapsody-on-Neurodiversity" class="internal alias" data-slug="A-Rhapsody-on-Neurodiversity">A Rhapsody on Neurodiversity</a>. In 2024, they were scanned and uploaded to Arweave, and PDF links are listed below.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Date</th><th>Title</th></tr></thead><tbody><tr><td>2019-??-??</td><td><a href="https://arweave.net/N99sSO8Bfnk6nejrDACPujcy-EecDroywn-yDL-WpUM" class="external">Evacuative Reorientation of Ideology<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-??-??</td><td><a href="https://arweave.net/Xww6eMhuoYIm9bzzvrfKEn_08xi0zkqi97tGu6-8wok" class="external">Ontological Duplicity<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-??-??</td><td><a href="https://arweave.net/fMH37TGbdqlw93FByuvEEJe732_5nWDPNxx7T-Kjojc" class="external">Pretextual &amp; Textual Activity<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-??-??</td><td><a href="https://arweave.net/I-T2WgjNE1dEx2pq88GCv56Kjx0F2oTKD_MPuq6zZ2I" class="external">Structure as the Interior of Extremes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-??-??</td><td><a href="https://arweave.net/f8B5zMHg-IZlh96JumuAGbTu0G9pYhpUcXSnlxyVe30" class="external">Untitled Diagram of Arbitrary Measurement<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-??-??</td><td><a href="https://arweave.net/whx3zn45lBEFg2NaM1F0ttT70Lp1sCk6i4uIFyoRqQQ" class="external">Untitled Diagram of Linear and Circular Placement<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-??-??</td><td><a href="https://arweave.net/EXeOI2p1MuXndgiEq6WpF_vBWYjaSndBRAYX3KzSFZ8" class="external">Untitled Notes on Horizontal Integration<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-??-??</td><td><a href="https://arweave.net/cTonrlcQQIB-G6F5sEuJpkM_PHt2GJJCdD9JqhV13zc" class="external">Untitled Partial Inventory A<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-??-??</td><td><a href="https://arweave.net/3OVrs4ERSDXBD0Xsn_RYex4NA3CO-t0QyHo4CZ6P5Uo" class="external">Untitled Partial Inventory B<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-??-??</td><td><a href="https://arweave.net/vBzOOjDcXuGUsyHKpfU1jO6qapl-wDMN-Pv3OALR1fo" class="external">Comment on The Dialectical Method and My Identity<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-04-21</td><td><a href="https://arweave.net/Tfs1B52RWMA0LCJKpRxDbGHEZ1TsZfNKC_ufFcgOaxQ" class="external">Psychocartography Brain Dump<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-05-04</td><td><a href="https://arweave.net/Pd5mZKjliphd3IUKMhn-EITV736ojTB-TVEIcu8ivXo" class="external">Dialectical Metabinaries<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-06-01</td><td><a href="https://arweave.net/IuatQRwPHJtInafy6g1y_Am4hygQo36aUJtBF9YTrt0" class="external">Intended &amp; Actual Movement<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-06-02</td><td><a href="https://arweave.net/AZ25InfhFCetIqwvZ4ORN_x0SKoBtop0SL527KH7wGc" class="external">Ideological Plasticity and Elasticity<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-06-06</td><td><a href="https://arweave.net/FAhv-skguRdP8J8t31Z6w-pL-NSxTnBKXWL3jQY8oM8" class="external">Positive &amp; Negative Information<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-06-09</td><td><a href="https://arweave.net/TCjPjEw4ang02QiDlrcOO3BgafEELR9MkHDjWKGV_X4" class="external">Untitled Notes on Dispersion<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-06-29</td><td><a href="https://arweave.net/CPJfDNdlb0ZDnOcYJsR9EdKlBrk1WC0YDmtJptSBZW4" class="external">Perpetually Recalibrating Relativity of Value<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-07-09</td><td><a href="https://arweave.net/BTFaFRt55-kC4iVMqyuqp6Wp3oGpvGNwCkaiOkr4YSs" class="external">A Treatise on the Intersubjective Economy of Morality<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-07-09</td><td><a href="https://arweave.net/NG7P3vufoE2JYWadU-8VTUWALNTfdxVyztXTIIjGNAs" class="external">Topography of Ideology<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-07-30</td><td><a href="https://arweave.net/E_c7c5A2DK2DZKPfWuUtkkyNn9_dyD8izm0UtorZHYk" class="external">Binary/Triadic Orientation of Object/Subject<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-08-??</td><td><a href="https://arweave.net/6Yo6H32mcx6UGsQWsntKT14JJkE8e9gAuVhj2je3Woo" class="external">Subjective Matrix<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-08-06</td><td><a href="https://arweave.net/3zeSJh3NJddgX54lhT9LOy8ndL74FNbfrb0x_kbt0mc" class="external">Partiality and Entirety in the Eligibility of Binary Distinctions<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-08-08</td><td><a href="https://arweave.net/omPqVKQCLXyf7Mgtg0-oyV3Ibqi3WhFmlq0GKC50V18" class="external">The Three Axes of Striation<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-08-15</td><td><a href="https://arweave.net/1d38WOqW-dxt9el68yEXY4ICSY76URZ5otNG32Yuu2I" class="external">Reform and Revolution<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-08-18</td><td><a href="https://arweave.net/6eJm8wIz26W5RTfCUXzkRrBOPXFBQsxGlZYdLDNp6Gg" class="external">Intentional/Effecual Difference<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-08-18</td><td><a href="https://arweave.net/S39SH0ws2MSpksTSdjqPqiJKpKjbU0fxTttocYi557w" class="external">Relevant Vocabulary<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-09-15</td><td><a href="https://arweave.net/bl3daza2CbBbOUy957L-o0W4tdWCiwyoYgRBKu4p9R0" class="external">Holistic Dichotomization <svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-09-24</td><td><a href="https://arweave.net/LX8TiAZTUm3zTvMQunTk1U1LpXHj7XIW6GoWNT7Qn88" class="external">The Approximation of the Goal<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-10-01</td><td><a href="https://arweave.net/T_3h2pwn77rTGgZ9ZdDderS7IJvGAG9Y30xWGZ4s1wQ" class="external">Fringe Acumen<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>2019-10-13</td><td><a href="https://arweave.net/yRrQnIMcN-GA5__MQngYbkFfXiXh21ExN6AY3NRcO18" class="external">Archive Series 0001 Content<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr></tbody></table></div>
+<hr/>
+<h3 id="specifications">Specifications<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#specifications" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>These documents are generated programmatically via AI, according to frameworks and directives I provide (see <a href="./resources/specs/Scoping-Document-Framework" class="internal alias" data-slug="resources/specs/Scoping-Document-Framework">Scoping Document Framework</a>). They serve as preliminary structural outlines for projects, as points of departure for more intentional refinement.</p>
+<h4 id="preliminary">Preliminary<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#preliminary" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li><a href="./resources/specs/Integrating-Quartz-and-Arwiki" class="internal alias" data-slug="resources/specs/Integrating-Quartz-and-Arwiki">Integrating Quartz and Arwiki</a></li>
+<li><a href="./resources/specs/Service-Schema-Scoping" class="internal alias" data-slug="resources/specs/Service-Schema-Scoping">Service Schema Scoping</a></li>
+</ul>
+<h4 id="refined">Refined<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#refined" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li><a href="./resources/specs/Cursor-Rules-Framework" class="internal alias" data-slug="resources/specs/Cursor-Rules-Framework">Cursor Rules Framework</a></li>
+</ul>
+<hr/>
+<h2 id="architecture">Architecture<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#architecture" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>This site uses a multi-modal architecture, functioning as a professional website, a portfolio, a blog, a digital garden, and a zettelkasten.</p>
+  <img src="https://arweave.net/KN9HUQIZ8Mpt0ibeMaIQMa1hWWwSgxFLQPLoyzrwh54" class="gallery-img" alt="Multi-modal site architecture"/>
+<h3 id="file-naming">File Naming<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#file-naming" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h4 id="reference-note-format">Reference Note Format<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reference-note-format" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>“r-AuthorInitials-TitleInitials-1” or “r-JK-GT-1”</p>
+<p>For example, the first note made primarily in reference to John Maynard Keynes’ <em>General Theory</em> would be r-JK-GT-1, the second would be r-JK-GT-2, etc. See this <a href="https://www.reddit.com/r/Zettelkasten/comments/1f8hap4/how_i_give_ids_to_my_reference_notes/" class="external">Reddit post<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> for more information.</p>
+<p>This method permits the interstitial inclusion of recursive reference notes, along the lines of folgezettel. For example, note r-JK-GT-1a could be made in reference to r-JK-GT-1, perhaps as a correction or an elaboration.</p>
+<h3 id="file-storage">File Storage<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#file-storage" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Arweave is the primary storage solution for this zettelkasten. Arweave hashes function as the primary URIs for inline images, videos, and other media.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="md" data-theme="github-light github-dark"><code data-language="md" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">MALjimE4g6_dO_DOWwbA_LOPOCNQkjI2v2aL3oYuG3w</span></span></code></pre></figure>
+<p>For example, the following markdown code renders the subsequent image in the browser:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="md" data-theme="github-light github-dark"><code data-language="md" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">![</span><span style="--shiki-light:#032F62;--shiki-light-text-decoration:underline;--shiki-dark:#DBEDFF;--shiki-dark-text-decoration:underline;">The Baths of Caracalla</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">](</span><span style="--shiki-light:#24292E;--shiki-light-text-decoration:underline;--shiki-dark:#E1E4E8;--shiki-dark-text-decoration:underline;">https://arweave.net/MALjimE4g6_dO_DOWwbA_LOPOCNQkjI2v2aL3oYuG3w</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span></code></pre></figure>
+<p><img src="https://arweave.net/MALjimE4g6_dO_DOWwbA_LOPOCNQkjI2v2aL3oYuG3w" alt="The Baths of Caracalla"/></p>
+<p>Arweave hashes are also used as URIs in frontmatter for page metadata. For example, page banners are expressed as:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="yaml" data-theme="github-light github-dark"><code data-language="yaml" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">bannerURI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">https://arweave.net/1OCpB8IN7kO8LiEOoutCLSSyGbHLHfhoJSQoloN_Y5g</span></span></code></pre></figure>
+<h3 id="frontmatter">Frontmatter<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#frontmatter" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Below is the full annotated frontmatter for the pages on this site. Not all pages will use all of the fields, and many of the fields are not required. Additionally, some of the fields are specific to this particular Quartz site(such as the ‘quartzShowGraph’ field). Some field are still in development.</p>
+<p>Arweave is the preferred permanent storage solution for this site’s static assets, with content accessible via Arweave-based URIs.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="yaml" data-theme="github-light github-dark"><code data-language="yaml" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">abstract</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Abstract of the page or publication</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">aiContribution</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Details about AI assistance in creating the content</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">  aiModel</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># The AI model used (e.g., Claude 3.5 Sonnet, GPT-4)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">  aiRole</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># The role the AI played (e.g., Primary content generator, Research assistant)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">  aiScope</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Description of what the AI contributed</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">author</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Author of the page (visualized by 'AuthorName.tsx', 'LicenseInfo.tsx', and 'CitationGenerator.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">authorURL</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># URL of the author (visualized by 'LicenseInfo.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">bannerURI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># URI of the banner image (Arweave is preferred; visualized by 'Banner.tsx'; converted into HTML 'og:image' tag and 'twitter:image' tag by 'Head.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">date</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Date of the page (visualized by 'Date.tsx', 'LicenseInfo.tsx', and 'CitationGenerator.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">degree</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Degree associated with the publication</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">department</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Department associated with the publication</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">doi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># DOI of the publication (visualized by 'CitationGenerator.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">edition</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Edition of the publication</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">headDescription</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Description of the page (Converted into HTML meta description tag by 'Head.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">headIcon</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># URI of the icon image (Arweave is preferred; converted into HTML icon tag by 'Head.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">hideComments</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Whether comments should be hidden on the page (true or false)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">institution</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Institution associated with the publication</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">issue</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Issue number of the publication (visualized by 'CitationGenerator.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">journal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Journal of the publication (visualized by 'CitationGenerator.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">keywords</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Keywords for the page or publication</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">language</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">en</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"> # Language of the publication</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">license</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># License of the publication (visualized by 'LicenseInfo.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">ogSiteName</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Open Graph site name for social media sharing</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">ogType</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Open Graph type for social media sharing</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">pages</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Page numbers of the publication (visualized by 'CitationGenerator.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">publish</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"> # Whether the page is published (true or false)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">publisher</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Publisher of the publication (visualized by 'CitationGenerator.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">publisherLocation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Publisher location of the publication (visualized by 'CitationGenerator.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowBacklinks</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"> # Whether the 'Backlinks.tsx' component is shown (true or false)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowBanner</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Whether the banner image is shown (true or false)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowCitation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"> # Whether the 'CitationGenerator.tsx' component is shown (true or false)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowExplorer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"> # Whether the 'Explorer.tsx' component is shown (true or false)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowFlex</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"> # Whether the 'FlexContainer.tsx' component is shown (true or false)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowGraph</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"> # Whether the 'Graph.tsx' component is shown (true or false)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzSearch</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"> # Whether the contents of the pages are indexed to be searchable by the 'Search.tsx' component (true or false)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowSubtitle</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"> # Whether the 'ArticleSubtitle.tsx' component is shown (true or false)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowTitle</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"> # Whether the 'ArticleTitle.tsx' component is shown (true or false)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowTOC</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"> # Whether the 'TableOfContents.tsx' component is shown (true or false)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">sponsor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Sponsor information if applicable</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">structuredData</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Structured data for SEO and machine readability</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">subtitle</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Subtitle of the page (visualized by 'ArticleSubtitle.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">tags</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># An array of tags for the page (visualized by 'TagList.tsx'; supports sub-tags)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">title</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Title of the page (visualized by 'ArticleTitle.tsx', 'LicenseInfo.tsx', and 'CitationGenerator.tsx'; converted into HTML 'title' tag by 'Head.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">twitterCard</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Twitter card type for social media sharing</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">twitterCreator</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Twitter handle of the content creator</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">type</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Content type (e.g., Article, Writing, Scope)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">url</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># URL of the page (visualized by 'CitationGenerator.tsx')</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">uuid</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Unique identifier for the page</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">volume</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Volume number of the publication (visualized by 'CitationGenerator.tsx')</span></span></code></pre></figure>
+<hr/>
+<h4 id="frontmatter-clean">Frontmatter (Clean)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#frontmatter-clean" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>Feel free to copy and paste the following template into your new page.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="yaml" data-theme="github-light github-dark"><code data-language="yaml" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">abstract</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">aiContribution</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">  aiModel</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">  aiRole</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">  aiScope</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">author</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">authorURL</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">bannerURI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">date</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">degree</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">department</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">doi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">edition</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">headDescription</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">headIcon</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">hideComments</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">institution</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">issue</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">journal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">keywords</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">language</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">license</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">ogSiteName</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">ogType</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">pages</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">publish</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">publisher</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">publisherLocation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowBacklinks</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowBanner</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowCitation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowExplorer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowFlex</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowGraph</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzSearch</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowSubtitle</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowTitle</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">quartzShowTOC</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">sponsor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">structuredData</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">subtitle</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">tags</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">title</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">twitterCard</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">twitterCreator</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">type</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">url</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">uuid</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">volume</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span></code></pre></figure>
+<hr/>
+<h3 id="customizations">Customizations<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#customizations" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled/> Add AuthorName.ts component.</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Add PublishDate.ts component.</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Add LicenseInfo.ts component.</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Add ArticleSubtitle component</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Configure Arweave sync functionality via Github workflows using protocol.land (<a href="https://docs.protocol.land/working-with-repositories/import-a-repository-from-github" class="external">docs<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Add CitationGenerator component
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled/> Support MLA, APA, IEEE, Harvard, Chicago citation styles</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Add FlexContainer component to hold LicenseInfo and CitationGenerator components</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Configure</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Configure custom frontmatter <span>→</span> HTML meta tag functionality
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled/> Icon path</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> OG image</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Description</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <a href="https://www.semrush.com/blog/canonical-url-guide/" class="external">Canonical URL<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li class="task-list-item"><input type="checkbox" disabled/> SEO keyword</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Configure limitations around search indexing, such that only pages with ‘quartzSearch: true’ in their frontmatter appear in inline search results.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Configure custom global graph layout
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled/> Tags in a fixed ring around the border of the rest of the graph.</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Monogram logo on background</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Add ImageModal component (This is a component that allows for the display of images in a modal window, with a caption and a link to the source.)</li>
+<li>[ ]</li>
+<li>[ ]</li>
+</ul>
+<hr/></article><div class="page-listing"><p>16 items under this folder.</p><div><ul class="section-ul"><li class="section-li"><div class="section"><p class="meta"><time datetime="2025-06-03T07:00:00.000Z">Jun 03, 2025</time></p><div class="desc"><h3><a href="./zettelgarten/r/" class="internal">r</a></h3></div><ul class="tags"></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2025-05-28T07:00:00.000Z">May 28, 2025</time></p><div class="desc"><h3><a href="./zettelgarten/DRAFT-Reflections-on-Applied-Auto-Didactic-Methodology,-Part-2" class="internal">Reflections on Applied Auto-Didactic Methodology, Part 2</a></h3></div><ul class="tags"></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2025-04-01T07:00:00.000Z">Apr 01, 2025</time></p><div class="desc"><h3><a href="./zettelgarten/Progress-on-the-Development-of-Runique" class="internal">Progress on the Development of Runique</a></h3></div><ul class="tags"></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2025-02-03T08:00:00.000Z">Feb 03, 2025</time></p><div class="desc"><h3><a href="./zettelgarten/Reflections-on-Applied-Auto-Didactic-Methodology" class="internal">Reflections on Applied Auto-Didactic Methodology</a></h3></div><ul class="tags"></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2025-01-23T08:00:00.000Z">Jan 23, 2025</time></p><div class="desc"><h3><a href="./zettelgarten/Intimations-of-a-Post-Machiavellian-Moral-Tactical-Calculus,-Part-2" class="internal">Intimations of a Post-Machiavellian Moral-Tactical Calculus, Part 2</a></h3></div><ul class="tags"></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2024-12-06T08:00:00.000Z">Dec 06, 2024</time></p><div class="desc"><h3><a href="./zettelgarten/Notes-on-Communicative-Methodology" class="internal">Notes on Communicative Methodology</a></h3></div><ul class="tags"></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2024-12-02T08:00:00.000Z">Dec 02, 2024</time></p><div class="desc"><h3><a href="./zettelgarten/Considerations-on-Delegate-Agents" class="internal">Considerations on Delegate Agents</a></h3></div><ul class="tags"></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2024-11-30T08:00:00.000Z">Nov 30, 2024</time></p><div class="desc"><h3><a href="./zettelgarten/Intimations-of-a-Post-Machiavellian-Moral-Tactical-Calculus" class="internal">Intimations of a Post-Machiavellian Moral-Tactical Calculus</a></h3></div><ul class="tags"></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2024-11-08T08:00:00.000Z">Nov 08, 2024</time></p><div class="desc"><h3><a href="./zettelgarten/Notes-on-Experimental-Zettelkasten-Methodology,-Part-2" class="internal">Notes on Experimental Zettelkasten Methodology (2)</a></h3></div><ul class="tags"><li><a class="internal tag-link" href="./tags/personal-discourse/log">personal-discourse/log</a></li></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2024-11-01T07:00:00.000Z">Nov 01, 2024</time></p><div class="desc"><h3><a href="./zettelgarten/Notes-on-an-Ethical-Hermeneutics-of-Machiavelli" class="internal">Notes on an Ethical Hermeneutics of Machiavelli</a></h3></div><ul class="tags"><li><a class="internal tag-link" href="./tags/personal-discourse/log">personal-discourse/log</a></li></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2024-10-31T07:00:00.000Z">Oct 31, 2024</time></p><div class="desc"><h3><a href="./zettelgarten/Notes-on-Methodology-for-Communities-of-Practice" class="internal">Notes on Methodology for Communities of Practice</a></h3></div><ul class="tags"><li><a class="internal tag-link" href="./tags/personal-discourse/log">personal-discourse/log</a></li></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2024-10-12T07:00:00.000Z">Oct 12, 2024</time></p><div class="desc"><h3><a href="./zettelgarten/Notes-on-Experimental-Zettelkasten-Methodology" class="internal">Notes on Experimental Zettelkasten Methodology</a></h3></div><ul class="tags"><li><a class="internal tag-link" href="./tags/personal-discourse/log">personal-discourse/log</a></li><li><a class="internal tag-link" href="./tags/misc/zettelkasten">misc/zettelkasten</a></li></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2024-10-06T07:00:00.000Z">Oct 06, 2024</time></p><div class="desc"><h3><a href="./zettelgarten/Notes-on-Keynes,-Hayek,-and-Fiscal-Protocols" class="internal">Notes on Keynes, Hayek, and Fiscal Protocols</a></h3></div><ul class="tags"><li><a class="internal tag-link" href="./tags/personal-discourse/log">personal-discourse/log</a></li><li><a class="internal tag-link" href="./tags/parafiscal">parafiscal</a></li><li><a class="internal tag-link" href="./tags/protocolization">protocolization</a></li></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2024-09-18T07:00:00.000Z">Sep 18, 2024</time></p><div class="desc"><h3><a href="./zettelgarten/Notes-on-Extitutional-Theory-and-Progressive-Protocolization" class="internal">Notes on Extitutional Theory and Progressive Protocolization</a></h3></div><ul class="tags"><li><a class="internal tag-link" href="./tags/personal-discourse/log">personal-discourse/log</a></li></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2024-09-08T07:00:00.000Z">Sep 08, 2024</time></p><div class="desc"><h3><a href="./zettelgarten/Notes-on-the-Distinction-between-Theoretical-and-Applied-Governance" class="internal">Notes on the Distinction between Theoretical and Applied Governance</a></h3></div><ul class="tags"><li><a class="internal tag-link" href="./tags/personal-discourse/log">personal-discourse/log</a></li></ul></div></li><li class="section-li"><div class="section"><p class="meta"><time datetime="2024-08-25T07:00:00.000Z">Aug 25, 2024</time></p><div class="desc"><h3><a href="./zettelgarten/Notes-on-Active-Discursive-Efforts" class="internal">Notes on Active Discursive Efforts</a></h3></div><ul class="tags"><li><a class="internal tag-link" href="./tags/personal-discourse/log">personal-discourse/log</a></li></ul></div></li></ul></div></div></div><hr/><div class="page-footer"></div></div><div class="right sidebar"></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v1.0.0</a> © 2025</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script type="application/javascript">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="../postscript.js" type="module"></script></html>

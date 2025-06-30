@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Clinamenic LLC</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Digital Garden"/><meta property="og:title" content="Clinamenic LLC"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Clinamenic LLC"/><meta name="twitter:description" content="@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } } :root { --wideradius: 35px; } html { animation: fade-in 3s ease-in; } .l1, .l2, .l3, .l4, .l5, .l6, .r1, .r2, .r3, .r4, .r5, .r6 { text-transform: uppercase; height: calc((100% - 5rem) / 6); text-align: center..."/><meta property="og:description" content="@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } } :root { --wideradius: 35px; } html { animation: fade-in 3s ease-in; } .l1, .l2, .l3, .l4, .l5, .l6, .r1, .r2, .r3, .r4, .r5, .r6 { text-transform: uppercase; height: calc((100% - 5rem) / 6); text-align: center..."/><meta property="og:image:alt" content="@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } } :root { --wideradius: 35px; } html { animation: fade-in 3s ease-in; } .l1, .l2, .l3, .l4, .l5, .l6, .r1, .r2, .r3, .r4, .r5, .r6 { text-transform: uppercase; height: calc((100% - 5rem) / 6); text-align: center..."/><meta property="og:image" content="https://https://www.example.com/static/og-image.png"/><meta property="og:image:url" content="https://https://www.example.com/static/og-image.png"/><meta name="twitter:image" content="https://https://www.example.com/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="https://www.example.com"/><meta property="og:url" content="https://https//www.example.com/index"/><meta property="twitter:url" content="https://https//www.example.com/index"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } } :root { --wideradius: 35px; } html { animation: fade-in 3s ease-in; } .l1, .l2, .l3, .l4, .l5, .l6, .r1, .r2, .r3, .r4, .r5, .r6 { text-transform: uppercase; height: calc((100% - 5rem) / 6); text-align: center..."/><meta name="generator" content="Quartz"/><link href="./index.css" rel="stylesheet" type="text/css" spa-preserve/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL1VzZXJzL2dpZGVvbi9EZXNrdG9wL3Rlc3Qtd29ya3NwYWNlLy5xdWFydHovcXVhcnR6L2NvbXBvbmVudHMvc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFOztBQUlGO0VBQ0U7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmV4cGFuZC1idXR0b24ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiByaWdodDtcbiAgcGFkZGluZzogMC40cmVtO1xuICBtYXJnaW46IDAuM3JlbTtcbiAgcmlnaHQ6IDA7IC8vIE5PVEU6IHJpZ2h0IHdpbGwgYmUgc2V0IGluIG1lcm1haWQuaW5saW5lLnRzXG4gIGNvbG9yOiB2YXIoLS1ncmF5KTtcbiAgYm9yZGVyLWNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbGlnaHQpO1xuICBib3JkZXI6IDFweCBzb2xpZDtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBvcGFjaXR5OiAwO1xuICB0cmFuc2l0aW9uOiAwLjJzO1xuXG4gICYgPiBzdmcge1xuICAgIGZpbGw6IHZhcigtLWxpZ2h0KTtcbiAgICBmaWx0ZXI6IGNvbnRyYXN0KDAuMyk7XG4gIH1cblxuICAmOmhvdmVyIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1zZWNvbmRhcnkpO1xuICB9XG5cbiAgJjpmb2N1cyB7XG4gICAgb3V0bGluZTogMDtcbiAgfVxufVxuXG5wcmUge1xuICAmOmhvdmVyID4gLmV4cGFuZC1idXR0b24ge1xuICAgIG9wYWNpdHk6IDE7XG4gICAgdHJhbnNpdGlvbjogMC4ycztcbiAgfVxufVxuXG4jbWVybWFpZC1jb250YWluZXIge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGNvbnRhaW46IGxheW91dDtcbiAgei1pbmRleDogOTk5O1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgZGlzcGxheTogbm9uZTtcbiAgYmFja2Ryb3AtZmlsdGVyOiBibHVyKDRweCk7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC41KTtcblxuICAmLmFjdGl2ZSB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB9XG5cbiAgJiA+ICNtZXJtYWlkLXNwYWNlIHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHRvcDogNTAlO1xuICAgIGxlZnQ6IDUwJTtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgICBoZWlnaHQ6IDgwdmg7XG4gICAgd2lkdGg6IDgwdnc7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcblxuICAgICYgPiAubWVybWFpZC1jb250ZW50IHtcbiAgICAgIHBhZGRpbmc6IDJyZW07XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><script src="./prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://https://www.example.com/index.xml"/></head><body data-slug="index"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href=".">Digital Garden</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><h1 class="article-title">Clinamenic LLC</h1><p show-comma="true" class="content-meta"><time datetime="2025-04-19T19:09:26.844Z">Apr 19, 2025</time><span>8 min read</span></p></div></div><article class="popover-hint"><style>
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  :root {
+    --wideradius: 35px;
+  }
+
+  html {
+    animation: fade-in 3s ease-in;
+  }
+
+  .l1, .l2, .l3, .l4, .l5, .l6, .r1, .r2, .r3, .r4, .r5, .r6 {
+    text-transform: uppercase;
+    height: calc((100% - 5rem) / 6);
+    text-align: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden; 
+    border: 1px solid var(--secondary); 
+    border-radius: var(--main-border-rad) !important; 
+    font-weight: 200; 
+    letter-spacing: 3px;
+    background-color: var(--lightgray);
+    transition: all 0.2s ease-in-out;
+    font-size: 0.85rem;
+    font-family: &quot;GeistMono&quot;, monospace;
+    line-height: 1.5rem;
+    cursor: default;
+  }
+  .l1:hover, .l2:hover, .l4:hover, .l6:hover, .r1:hover, .r2:hover, .r3:hover, .r5:hover {
+    color: black !important;
+    background-image: none !important;
+    background-color: var(--tertiary) !important;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  .l1 {
+    border-top-right-radius: var(--wideradius) !important;
+    border-bottom-left-radius: var(--wideradius) !important;
+    animation: slide-from-left 3s ease-in-out forwards;
+  }
+  .l2 {
+    border-top-left-radius: var(--wideradius) !important;
+    border-bottom-right-radius: var(--wideradius) !important;
+    animation: slide-from-left 3.5s ease-in-out forwards;
+  }
+  .l3 {
+    border-top-right-radius: var(--wideradius) !important;
+    border-bottom-left-radius: var(--wideradius) !important;
+    animation: slide-from-left 4s ease-in-out forwards;
+  }
+  .l4 {
+    border-top-left-radius: var(--wideradius) !important;
+    border-bottom-right-radius: var(--wideradius) !important;
+    animation: slide-from-left 4.5s ease-in-out forwards;
+  }
+  .l5 {
+    border-top-right-radius: var(--wideradius) !important;
+    border-bottom-left-radius: var(--wideradius) !important;
+    animation: slide-from-left 5s ease-in-out forwards;
+  }
+  .l6 {
+    border-top-left-radius: var(--wideradius) !important;
+    border-bottom-right-radius: var(--wideradius) !important;
+    animation: slide-from-left 5.5s ease-in-out forwards;
+  }
+  .r1 {
+    border-top-left-radius: var(--wideradius) !important;
+    border-bottom-right-radius: var(--wideradius) !important;
+    animation: slide-from-right 3s ease-in-out forwards;
+  }
+  .r2 {
+    border-top-right-radius: var(--wideradius) !important;
+    border-bottom-left-radius: var(--wideradius) !important;
+    animation: slide-from-right 3.5s ease-in-out forwards;
+  }
+  .r3 {
+    border-top-left-radius: var(--wideradius) !important;
+    border-bottom-right-radius: var(--wideradius) !important;
+    animation: slide-from-right 4s ease-in-out forwards;
+  }
+  .r4 {
+    border-top-right-radius: var(--wideradius) !important;
+    border-bottom-left-radius: var(--wideradius) !important;
+    animation: slide-from-right 4.5s ease-in-out forwards;
+  }
+  .r5 {
+    border-top-left-radius: var(--wideradius) !important;
+    border-bottom-right-radius: var(--wideradius) !important;
+    animation: slide-from-right 5s ease-in-out forwards;
+  }
+  .r6 {
+    border-top-right-radius: var(--wideradius) !important;
+    border-bottom-left-radius: var(--wideradius) !important;
+    animation: slide-from-right 5.5s ease-in-out forwards;
+  }
+
+  .center {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    > article.popover-hint {
+      > p, h1, h2, h3, h4, h5, h6, li::marker {
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+    }
+    }
+  }
+
+  header {
+    animation: fade-down-100 3s ease-in-out
+  }
+
+  .mobile-gallery2-fixed {
+    @media only screen and (max-width: 750px) {
+  display: grid;
+  width: 100%;
+  max-width: var(--pageContentWidth);
+  grid-template-columns: repeat(2, calc((100% - 1rem) / 2));
+  grid-template-rows: repeat(infinite, 49%);
+  justify-content: center;
+  grid-row-gap: 1rem;
+  grid-column-gap: 1rem;
+
+  > .side-column {
+    display: flex;
+    > .l1, .l2, .l3, .l4, .l5, .l6, .r1, .r2, .r3, .r4, .r5, .r6 {
+      font-size: 0.7rem;
+      height: 100%;
+    }
+  }
+  }
+  @media only screen and (min-width: 750px) {
+    display: none;
+  }
+  }
+
+.marquee {
+  animation: fade-in 5s ease-in;
+  width: calc(100% + 2rem);
+  transform: translateX(-1rem);
+  &amp; .exp-text {
+    z-index: 2;
+  }
+  &amp; .exp-tile{
+    box-sizing: border-box;
+    background: var(--lightgray);
+    border: 1px solid var(--gray);
+    > img {
+      opacity: 100%;
+      filter: invert(30%);
+    }
+  }
+}
+
+.logo-block {
+  box-sizing: border-box;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: var(--secondary-color);
+  opacity: 1;
+  border-radius: 15px;
+  border: 1px solid var(--gray);
+  animation: color-blend 3s infinite ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+.logo-bar {
+  box-sizing: border-box;
+  position: absolute;
+  width: 90px;
+  height: 30px;
+  background-color: var(--secondary-color);
+  opacity: 1;
+  border-radius: 15px !important;
+  border: 1px solid var(--gray);
+  animation: color-blend 3s infinite ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+@keyframes color-blend {
+    0%{ background-color: var(--tertiary) }
+    50%{ background-color: var(--secondary)  } 
+    100%{ background-color: var(--tertiary) }
+  }
+@keyframes color-blend-alt {
+    0%{ background-color: var(--tertiary) }
+    50%{ background-color: var(--secondary)  } 
+    100%{ background-color: var(--tertiary) }
+  }
+
+#offerings-1 {
+  margin: 1rem 0rem 0rem 0rem;
+  height: 239px;
+  @media only screen and (max-width: 750px) {
+    height: auto ;
+    }
+}
+
+.gallery3 {
+  > .text-box {
+    overflow: hidden;
+    max-height: 300px;
+    box-sizing: border-box;
+  }
+}
+
+.autoglypha-text {
+  font-family: GeistMono; 
+  font-size: 0.82rem; 
+  letter-spacing: 3.68px; 
+  text-transform: uppercase; 
+  font-weight: 200; 
+  cursor: default; 
+  text-shadow: 0px 0px 10px var(--lightgray); 
+  display: none; 
+  transition: all 0.3s ease-in-out; 
+  animation: rotate-counter 25s infinite;
+  @media only screen and (max-width: 750px) {
+    display: block;
+  }
+}
+
+#autoglypha-box {
+  text-align: center; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  animation: fade-in 4.5s ease-in; 
+  box-sizing: border-box; 
+  background-color: var(--lightgray); 
+  background-image: url('https://arweave.net/jZ3EAO7Pl3ldWyNLkfDJ9ksghEouDZSuOAvS9T9Ii6M'); 
+  background-repeat: repeat; 
+  background-position: center; 
+  background-attachment: fixed; 
+  background-size: 125%;
+  max-height: 239px;
+  transition: all 0.3s ease-in-out;
+  > .external-icon {
+    display: none;
+  }
+  @media only screen and (max-width: 750px) {
+    background-color: rgba(121, 197, 126, 0.25);
+    background-size: 200%;
+  }
+}
+
+#autoglypha-box:hover {
+  background-color: rgba(121, 197, 126, 0.25);
+  transition: all 0.3s ease-in-out;
+  border: 1px solid var(--secondary);
+  &amp; .logo-bar {
+    border: 1px solid var(--dark);
+    transition: all 0.3s ease-in-out;
+  }
+  &amp; .logo-block {
+    border: 1px solid var(--dark);
+    transition: all 0.3s ease-in-out;
+  }
+  &amp; .autoglypha-text {
+  display: block;
+  transition: all 0.3s ease-in-out;
+}
+}
+
+@keyframes rotate-counter {
+    0%{ transform: rotate(0deg) }
+    5%{ transform: rotate(0deg) }
+    50%{ transform: rotate(-180deg) }
+    55%{ transform: rotate(-180deg) }
+    100%{ transform: rotate(-360deg) }
+  }
+
+.gallery3 {
+  margin-top: 1rem;
+  animation: fade-in 4.5s ease-in;
+    &amp; .service-tile {
+      overflow: hidden;
+      margin-bottom: 0rem;
+      height: 200px;
+      @media only screen and (max-width: 750px) {
+      height: auto;
+      }
+      > .service-tile-offerings {
+        display: none;
+      }
+      > .service-tile-description {
+        font-family: &quot;GeistMono&quot;;
+        font-weight: 100;
+      }
+      &amp; .offering-desc {
+        display: none;
+      }
+    }
+  }
+
+.center > article.popover-hint > h1,
+.center > article.popover-hint > h2,
+.center > article.popover-hint > h3,
+.center > article.popover-hint > h4,
+.center > article.popover-hint > h5,
+.center > article.popover-hint > h6,
+.center > .popover-hint > article > h1,
+.center > .popover-hint > article > h2,
+.center > .popover-hint > article > h3,
+.center > .popover-hint > article > h4,
+.center > .popover-hint > article > h5,
+.center > .popover-hint > article > h6 {
+  background: var(--highlight);
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+  margin: 1rem 0rem;
+  font-weight: 100;
+  animation: fade-in 4.5s ease-in; 
+  text-transform: none;
+}
+
+ul {
+  animation: fade-in 4.5s ease-in; 
+}
+</style>
+<script>
+document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
+  const marqueeContent = document.querySelector('.marquee-content');
+  const tiles = Array.from(marqueeContent.children);
+  const duplicateContent = tiles.map(tile => tile.cloneNode(true));
+  duplicateContent.forEach(clone => marqueeContent.appendChild(clone));
+});
+</script>
+<div class="tri-column">
+<div class="side-column">
+<a href="./about" class="l1 internal alias" data-slug="about">About</a>
+<a href="./services" class="l2 internal alias" data-slug="services">Services</a>
+<a href="." class="l3 internal" data-slug="index"></a>
+<a href="./design" class="l4 internal alias" data-slug="design">Design</a>
+<a href="." class="l5 internal" data-slug="index"></a>
+<a href="./typography" class="l6 internal alias" data-slug="typography">Fonts</a>
+</div>
+<div class="text-box" style="background-image:url(https://arweave.net/hbmMt-9koK_dnMScUW6OdJDiBtKlPY2DkvMwNBPu5zM);background-size:180px;background-color:var(--light);background-attachment:fixed;background-position:center;background-repeat:repeat;padding:0rem 0rem 0rem 0rem;animation:fade-in 3s ease-in;">
+<div class="text-box" style="background-color:var(--lightgray);opacity:0.96;margin:0rem 0rem 0rem 0rem;border:0px;padding:0.5rem 0rem 2rem 0rem;">
+  <div class="clinamenic-cube" style="text-align:center;justify-content:center;">
+    <img src="https://arweave.net/KIy4ZM-FoCYsj9DxH8WIVI-HmhZpPY4V_eVJI-1DFkw" width="250px" height="250px" alt="Clinamenic Cube"/>
+  </div>
+  <p class="body-p" style="animation:fade-in 3s ease-in;font-size:1.6rem;font-weight:300;text-align:center;font-family:GeistMono, monospace;text-shadow:0px 0px 15px var(--lightgray);letter-spacing:1px;">Clinamenic LLC</p>
+  <p class="body-p" style="animation:fade-in 3s ease-in;font-size:0.8rem;font-weight:100;letter-spacing:1px;text-align:center;font-style:italic;margin:0.6rem 0rem 0.4rem 0rem;text-shadow:0px 0px 15px var(--lightgray);">the consultancy of</p>
+  <p class="body-p" style="animation:fade-in 3s ease-in;font-size:0.8rem;font-weight:300;text-align:center;font-style:normal;line-height:1.2rem;text-shadow:0px 0px 15px var(--lightgray);">S P E N C E R</p>
+  <div style="display:flex;justify-content:center;">
+    <p class="body-p" style="animation:fade-down 5s ease-in-out;font-size:0.8rem;font-weight:300;text-align:center;position:relative;font-style:normal;line-height:1.2rem;text-shadow:0px 0px 15px var(--lightgray);">S   </p>
+    <p class="body-p" style="animation:fade-up 5s ease-in-out;font-size:0.8rem;font-weight:300;text-align:center;position:relative;font-style:normal;line-height:1.2rem;text-shadow:0px 0px 15px var(--lightgray);">A   A</p>
+    <p class="body-p" style="animation:fade-down 5s ease-in-out;font-size:0.8rem;font-weight:300;text-align:center;position:relative;font-style:normal;line-height:1.2rem;text-shadow:0px 0px 15px var(--lightgray);">   R</p>
+  </div>
+  <p class="body-p" style="animation:fade-in 3s ease-in;font-size:0.8rem;font-weight:300;text-align:center;font-style:normal;line-height:1.2rem;text-shadow:0px 0px 15px var(--lightgray);">C A V A N A U G H</p>
+</div>
+</div>
+<div class="side-column">
+<a href="./about#contact" class="r1 internal alias" data-slug="about">Contact</a>
+<a href="./writing" class="r2 internal alias" data-slug="writing">Writing</a>
+<a href="./zettelgarten" class="r3 internal alias" data-slug="zettelgarten">Zettel</a>
+<a href="." class="r4 internal" data-slug="index"></a>
+<a href="./gallery" class="r5 internal alias" data-slug="gallery">Gallery</a>
+<a href="." class="r6 internal" data-slug="index"></a>
+</div>
+</div>
+<div class="mobile-gallery2-fixed" style="margin:1rem 0rem 0rem 0rem;height:400px;">
+  <div class="side-column">
+  <a href="./about" class="l1 internal alias" data-slug="about">About</a>
+  <a href="./services" class="l2 internal alias" data-slug="services">Services</a>
+  <a href="." class="l3 internal" data-slug="index"></a>
+  <a href="./design" class="l4 internal alias" data-slug="design">Design</a>
+  <a href="." class="l5 internal" data-slug="index"></a>
+  <a href="./typography" class="l6 internal alias" data-slug="typography">Fonts</a>
+  </div>
+  <div class="side-column">
+  <a href="./about#contact" class="r1 internal alias" data-slug="about">Contact</a>
+  <a href="./writing" class="r2 internal alias" data-slug="writing">Writing</a>
+  <a href="./zettelgarten" class="r3 internal alias" style="letter-spacing:1px;" data-slug="zettelgarten">Zettel</a>
+  <a href="." class="r4 internal" data-slug="index"></a>
+  <a href="./gallery" class="r5 internal alias" data-slug="gallery">Gallery</a>
+  <a href="." class="r6 internal" data-slug="index"></a>
+  </div>
+</div>
+<div class="marquee" style="margin:1rem 0rem 0rem 0rem;">
+  <div class="marquee-content">
+  <div class="exp-tile">
+      <div class="exp-text">
+        <p style="padding-bottom:0.5rem;font-weight:300;">JournoDAO</p>
+        <p>Co-founder</p>
+      </div>
+      <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmW14vYxLFSCTwfHBA3x1aNz5hxXxnXBv7rTozTnKnnJS4" alt="JournoDAO"/>
+    </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">PubDAO</p>
+      <p>Core Team</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmUqoP49eDSyriR6oettsdfig27hXufCa6pPyuR7PYg7Jm" alt="PubDAO"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Decrypt</p>
+      <p>Contractor</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmUkoLVZZruos3gqh88nnUF1811S6haR3CXsSNw58hbtLd" alt="Decrypt"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Holonym</p>
+      <p>Contractor</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmVY6gdSXhBL5QdfapSKciSKG7oVbppQDhSaaEABC9nKNW" alt="Holonym"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Lobby3 UNA</p>
+      <p>Director</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmeCKyJFTMKVErB1u31NoEokYHUWsFiMeYk6nuariWSdEW" alt="Lobby3 UNA"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">DAO<br/>Coalition</p>
+      <p>Chairman</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmaP6CSzJp6wJbECW4gLGfrDhjpu48oMEhm7tyg8oZaMFg" alt="DAO Coalition"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Education<br/>DAO</p>
+      <p>Counsel</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmbxodFHbEpZaYo5AdjUR5Wu77vVJ5H53ZDHRLPawJRiRT" alt="Education DAO"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Consensys</p>
+      <p>Contractor</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmZCijUn73vZnCU6PyMGmTe9kMXzDZHgQzXVmZCwidaZmH" alt="Consensys"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Tally</p>
+      <p>Contractor</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmRcnc8rhYXYw9uKREKGUuTcevNnDbiwBusGni41HHMPbm" alt="Tally"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Alexandria</p>
+      <p>Contractor</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmQLR5YTZj9XB4DrNbU9JXGi989cC8aDxwxXV66Yj5ph2z" alt="Alexandria"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">OpenCivics</p>
+      <p>Steward</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmXPC32sP9t7U3aFwk4Qpi16oMycekazrP9rGfYVoYGJrX" alt="OpenCivics"/>
+  </div>
+  <div class="exp-tile">
+      <div class="exp-text">
+        <p style="padding-bottom:0.5rem;font-weight:300;">JournoDAO</p>
+        <p>Co-founder</p>
+      </div>
+      <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmW14vYxLFSCTwfHBA3x1aNz5hxXxnXBv7rTozTnKnnJS4" alt="JournoDAO"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">PubDAO</p>
+      <p>Core Team</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmUqoP49eDSyriR6oettsdfig27hXufCa6pPyuR7PYg7Jm" alt="PubDAO"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Decrypt</p>
+      <p>Contractor</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmUkoLVZZruos3gqh88nnUF1811S6haR3CXsSNw58hbtLd" alt="Decrypt"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Holonym</p>
+      <p>Contractor</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmVY6gdSXhBL5QdfapSKciSKG7oVbppQDhSaaEABC9nKNW" alt="Holonym"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Lobby3 UNA</p>
+      <p>Director</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmeCKyJFTMKVErB1u31NoEokYHUWsFiMeYk6nuariWSdEW" alt="Lobby3 UNA"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">DAO<br/>Coalition</p>
+      <p>Chairman</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmaP6CSzJp6wJbECW4gLGfrDhjpu48oMEhm7tyg8oZaMFg" alt="DAO Coalition"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Education<br/>DAO</p>
+      <p>Counsel</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmbxodFHbEpZaYo5AdjUR5Wu77vVJ5H53ZDHRLPawJRiRT" alt="Education DAO"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Consensys</p>
+      <p>Contractor</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmZCijUn73vZnCU6PyMGmTe9kMXzDZHgQzXVmZCwidaZmH" alt="Consensys"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Tally</p>
+      <p>Contractor</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmRcnc8rhYXYw9uKREKGUuTcevNnDbiwBusGni41HHMPbm" alt="Tally"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">Alexandria</p>
+      <p>Contractor</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmQLR5YTZj9XB4DrNbU9JXGi989cC8aDxwxXV66Yj5ph2z" alt="Alexandria"/>
+  </div>
+  <div class="exp-tile">
+    <div class="exp-text">
+      <p style="padding-bottom:0.5rem;font-weight:300;">OpenCivics</p>
+      <p>Steward</p>
+    </div>
+    <img src="https://indigo-cautious-chinchilla-877.mypinata.cloud/ipfs/QmXPC32sP9t7U3aFwk4Qpi16oMycekazrP9rGfYVoYGJrX" alt="OpenCivics"/>
+  </div>
+  </div>
+</div>
+<h2 id="services">Services<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#services" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<div class="gallery3">
+<div id="service-1">
+  <div class="service-tile-banner">Service Category</div>
+  <div class="service-tile" data-service-id="1">
+  <h3 id="governance">Governance<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#governance" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+  <p class="service-tile-description"> Configuration, auditing, and implementation of governance frameworks, specializing in on-chain organizations and smart contract-based structures.</p>
+  <div class="service-tile-offerings"><strong>Offerings:</strong><ul><li><a href="./services#governance-audit" class="internal" data-slug="services"><strong>Governance Audit</strong></a><span class="offering-desc">: Analysis and assessment of governance structures with recommendations</span></li><li><a href="./services#governance-framework" class="internal" data-slug="services"><strong>Governance Framework</strong></a><span class="offering-desc">: Creation and implementation of governance frameworks</span></li><li><a href="./services#grants-program" class="internal" data-slug="services"><strong>Grants Program</strong></a><span class="offering-desc">: Design and management of onchain grants programs</span></li><li><a href="./services#governance-advisory" class="internal" data-slug="services"><strong>Governance Advisory</strong></a><span class="offering-desc">: Ongoing strategic governance guidance</span></li><li><a href="./services#governance-council" class="internal" data-slug="services"><strong>Governance Council</strong></a><span class="offering-desc">: Facilitation support for regular governance meetings and proposal reviews</span></li></ul></div>
+</div>
+<div class="service-tile-explore">
+  <a href="./services#governance" class="button internal alias" data-slug="services">Explore Offerings</a>
+</div>
+</div>
+<div id="service-2">
+  <div class="service-tile-banner">Service Category</div>
+  <div class="service-tile" data-service-id="2">
+  <h3 id="knowledge">Knowledge<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#knowledge" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+  <p class="service-tile-description">Design, setup, and optimization of personal and organizational knowledge bases (wikis), specializing in open, local-first architectures.</p>
+  <div class="service-tile-offerings"><strong>Offerings:</strong><ul><li><a href="./services#personal-knowledge-base" class="internal" data-slug="services"><strong>Personal Knowledge Base</strong></a><span class="offering-desc">: Setup of personal knowledge bases powered by Quartz, Obsidian, and Cursor</span></li><li><a href="./services#team-knowledge-base" class="internal" data-slug="services"><strong>Team Knowledge Base</strong></a><span class="offering-desc">: Setup of team-based knowledge management systems with collaboration features</span></li><li><a href="./services#unified-knowledge-retainer" class="internal" data-slug="services"><strong>Unified Knowledge Retainer</strong></a><span class="offering-desc">: Technical maintenance, strategic guidance, and knowledge structure optimization</span></li></ul></div>
+</div>
+<div class="service-tile-explore">
+  <a href="./services#knowledge" class="button internal alias" data-slug="services">Explore Offerings</a>
+</div>
+</div>
+<div id="service-3">
+  <div class="service-tile-banner">Service Category</div>
+  <div class="service-tile" data-service-id="3">
+  <h3 id="branding">Branding<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#branding" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+  <p class="service-tile-description">Developing cohesive visual and verbal identities for organizations, focusing on clarity, consistency, and impact.</p>
+  <div class="service-tile-offerings"><strong>Offerings:</strong><ul><li><a href="./services#brand-kit" class="internal" data-slug="services"><strong>Brand Kit</strong></a><span class="offering-desc">:  Development of visual identity systems for organizations</span></li><li><a href="./services#campaign-kit" class="internal" data-slug="services"><strong>Campaign Kit</strong></a><span class="offering-desc">: Specialized visual assets for campaigns and events by established brands</span></li></ul></div>
+</div>
+<div class="service-tile-explore">
+  <a href="./services#branding" class="button internal alias" data-slug="services">Explore Offerings</a>
+</div>
+</div>
+</div>
+<h2 id="featured-writings">Featured Writings<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#featured-writings" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="./A-Rhapsody-on-Neurodiversity" class="internal alias" data-slug="A-Rhapsody-on-Neurodiversity">A Rhapsody on Neurodiversity</a></li>
+<li><a href="./Wu-Gwei,-or-Going-with-the-Flow-of-Governance" class="internal alias" data-slug="Wu-Gwei,-or-Going-with-the-Flow-of-Governance">Wu Gwei, or Going with the Flow of Governance</a></li>
+<li><a href="./Malattunement-before-Malice" class="internal alias" data-slug="Malattunement-before-Malice">Malattunement before Malice</a></li>
+<li><a href="./What-Are-Onchain-Organizations" class="internal alias" data-slug="What-Are-Onchain-Organizations">What Are Onchain Organizations?</a></li>
+<li><a href="./Prospectus-of-the-Reconciliation-of-Individual-Liberty-and-Collective-Welfare" class="internal alias" data-slug="Prospectus-of-the-Reconciliation-of-Individual-Liberty-and-Collective-Welfare">Prospectus of the Reconciliation of Individual Liberty and Collective Welfare</a></li>
+<li><a href="./A-Solarpunk-Typography-Expose" class="internal alias" data-slug="A-Solarpunk-Typography-Expose">A Solarpunk Typography Expose</a></li>
+<li><a href="./Progressive-Public-Goods-Funding" class="internal alias" data-slug="Progressive-Public-Goods-Funding">Progressive Public Goods Funding</a></li>
+<li><a href="./Survey-on-Methodology-for-Onchain-Ecosystem-Funding-and-Impact-Assessment" class="internal alias" data-slug="Survey-on-Methodology-for-Onchain-Ecosystem-Funding-and-Impact-Assessment">Survey on Methodology for Onchain Ecosystem Funding and Impact Assessment</a></li>
+</ul>
+<h2 id="projects">Projects<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#projects" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<div class="gallery3" id="offerings-1">
+<div class="text-box" style="padding:1rem 0rem 0rem 0rem;align-items:center;justify-content:center;animation:fade-in 4s ease-in;box-sizing:border-box;overflow:hidden;">
+  <p style="text-align:center;font-family:VampiroOne;font-size:2.3rem;letter-spacing:0px;padding:0px;margin:0rem 0rem 0rem 0rem;margin-top:20px;rotate:-2deg;animation:jiggle 4s ease-in-out infinite;color:var(--tertiary);text-shadow:1px 1px 0px black;">Casual</p>
+  <p style="text-align:center;font-family:MEK-Mono;font-size:3.4rem;letter-spacing:0px;padding:0px;margin:0.65rem 1rem 1.5rem 1rem;">DELEGATE</p>
+  <p style="margin:0rem 1.5rem 1.5rem 1.5rem;text-align:center;font-size:0.7rem;line-height:1.2rem;">Clinamenic LLC is available as a governance delegate for select organizations. <br/><br/><a href="./services" class="tag internal alias" style="color:var(--secondary);" data-slug="services">Coming soon!</a>
+  </p></div>
+<a href="https://autoglypha.clinamenic.com/?ref=clinamenic" class="text-box external" id="autoglypha-box">
+  <div style="position:relative;width:325px;height:325px;display:flex;justify-content:center;align-items:center;">
+    <svg viewBox="-150 -150 300 300" style="position:absolute;width:325px;height:325px;transform:rotate(145deg);">
+      <path id="circle-path" d="M 0,90 A 90,90 0 1 1 0,-90 A 90,90 0 1 1 0,90" fill="none"></path>
+      <text class="autoglypha-text">
+        <textPath href="#circle-path" startOffset="0%">
+          Autoglypha     Glyph-Based Cellular Automata
+        </textPath>
+      </text>
+    </svg>
+    <div id="autoglypha-logo" style="height:180px;width:180px;display:flex;animation:fade-in 4.5s ease-in-out;">
+      <div class="logo-bar" style="top:calc(50% - 75px);left:calc(50% - 45px);animation:color-blend-alt 4s infinite ease-in-out;"></div>
+      <div class="logo-block" style="top:calc(50% - 45px);left:calc(50% - 75px);animation:color-blend-alt 7s infinite ease-in-out;"></div>
+      <div class="logo-block" style="top:calc(50% - 45px);left:calc(50% + 45px);animation:color-blend 5s infinite ease-in-out;"></div>
+      <div class="logo-bar" style="top:calc(50% - 15px);left:calc(50% - 45px);animation:color-blend-alt 7s infinite ease-in-out;"></div>
+      <div class="logo-block" style="top:calc(50% + 15px);left:calc(50% - 75px);animation:color-blend 8s infinite ease-in-out;"></div>
+      <div class="logo-block" style="top:calc(50% + 15px);left:calc(50% + 45px);animation:color-blend-alt 4s infinite ease-in-out;"></div>
+      <div class="logo-block" style="top:calc(50% + 45px);left:calc(50% - 45px);animation:color-blend 6s infinite ease-in-out;"></div>
+      <div class="logo-block" style="top:calc(50% + 45px);left:calc(50% + 15px);animation:color-blend-alt 6s infinite ease-in-out;"></div>
+    </div>
+  </div>
+<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>
+</div>
+<h2 id="reading-notes">Reading Notes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reading-notes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="./resources/texts/Common-Sense" class="internal alias" data-slug="resources/texts/Common-Sense">Common Sense</a> by Thomas Paine
+<ul>
+<li><a href="./zettelgarten/r/r-TP-CS-Hub" class="internal" data-slug="zettelgarten/r/r-TP-CS-Hub">r-TP-CS-Hub</a> (<a href="https://arweave.net/AaoeGtWNY91c8dnRNnpIFthgQUzUWcaiUWqNjwVVCXc" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/The-Prince" class="internal alias" data-slug="resources/texts/The-Prince">The Prince</a> by Niccolo Machiavelli
+<ul>
+<li><a href="./zettelgarten/r/r-NM-TP-Hub" class="internal" data-slug="zettelgarten/r/r-NM-TP-Hub">r-NM-TP-Hub</a> (<a href="https://arweave.net/glUJLGM3lyA-uQIkqspE2TL5NcEqJ_lXXF3MapobRdI" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/Discourses-on-Livy" class="internal alias" data-slug="resources/texts/Discourses-on-Livy">Discourses on Livy</a> by Niccolo Machiavelli
+<ul>
+<li><a href="./zettelgarten/r/r-NM-DL-Hub" class="internal" data-slug="zettelgarten/r/r-NM-DL-Hub">r-NM-DL-Hub</a> (<a href="https://arweave.net/NaIidh_-YawX9SCDndIT3KeaBuUL7pJC2i33ENokUOM" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li>The Art of War by Niccolo Machiavelli
+<ul>
+<li><a href="./zettelgarten/r/r-NM-AW-Hub" class="internal" data-slug="zettelgarten/r/r-NM-AW-Hub">r-NM-AW-Hub</a> (<a href="https://arweave.net/YWLS5SaigET0-d6aYFA_7d8XqAp20wg03yxWRjpy2yc" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li>The Road to Serfdom by Friedrich Hayek
+<ul>
+<li><a href="./zettelgarten/r/r-FH-RS-Hub" class="internal" data-slug="zettelgarten/r/r-FH-RS-Hub">r-FH-RS-Hub</a> (<a href="https://arweave.net/0y1khEq9DviaVSfnqwQTTGY8gIMDgz4ro_zEisrwtvM" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li>The Constitution of Liberty by Friedrich Hayek
+<ul>
+<li><a href="./zettelgarten/r/r-FH-CL-Hub" class="internal" data-slug="zettelgarten/r/r-FH-CL-Hub">r-FH-CL-Hub</a> (<a href="https://arweave.net/9kRKCwO-kcYIq09zw5kvUKTlkSdUsRQbAOEi0ZMGY7U" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li>The Use of Knowledge in Society by Friedrich Hayek
+<ul>
+<li><a href="./zettelgarten/r/r-FH-UK-Hub" class="internal" data-slug="zettelgarten/r/r-FH-UK-Hub">r-FH-UK-Hub</a> (<a href="https://arweave.net/AjyAAePH9onEQkOPyYjF-EPC5UnmL4-NSzHHuZKMIh4" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/Progress-and-Poverty" class="internal alias" data-slug="resources/texts/Progress-and-Poverty">Progress and Poverty</a> by Henry George
+<ul>
+<li><a href="./zettelgarten/r/r-HG-PP-Hub" class="internal" data-slug="zettelgarten/r/r-HG-PP-Hub">r-HG-PP-Hub</a> (<a href="https://arweave.net/i60F46yup0pmX5hTnQCkD9Mf6_AYXqPG9LqlUFG6dEY" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/On-the-Nature-of-Things" class="internal alias" data-slug="resources/texts/On-the-Nature-of-Things">On the Nature of Things</a> by Lucretius
+<ul>
+<li><a href="./zettelgarten/r/r-Lu-NT-Hub" class="internal" data-slug="zettelgarten/r/r-Lu-NT-Hub">r-Lu-NT-Hub</a> (<a href="https://arweave.net/iR-wBZ_M-Lx3aWQH0-OH6ilHX0CQsN1DeT94YmlG5ic" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/The-General-Theory-of-Employment,-Interest-and-Money" class="internal alias" data-slug="resources/texts/The-General-Theory-of-Employment,-Interest-and-Money">The General Theory of Employment, Interest and Money</a> by John Maynard Keynes
+<ul>
+<li><a href="./zettelgarten/r/r-JK-GT-Hub" class="internal" data-slug="zettelgarten/r/r-JK-GT-Hub">r-JK-GT-Hub</a> (<a href="https://arweave.net/H-sFwO94FGoSjV-5F13dlvJzgBmR3r6uVC9FsLRRW30" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li>Discourse on the Origin and Basis of Inequality Among Men by Jean-Jacques Rousseau
+<ul>
+<li><a href="./zettelgarten/r/r-JR-DO-Hub" class="internal" data-slug="zettelgarten/r/r-JR-DO-Hub">r-JR-DO-Hub</a> (<a href="https://arweave.net/D9ZA1bbl5yon6F782XEDUB7zV4ckLSPojhGw0whI9Fw" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/The-Federalist-Papers" class="internal alias" data-slug="resources/texts/The-Federalist-Papers">The Federalist Papers</a> by Publius
+<ul>
+<li><a href="./zettelgarten/r/r-Pu-FP-Hub" class="internal" data-slug="zettelgarten/r/r-Pu-FP-Hub">r-Pu-FP-Hub</a> (<a href="https://arweave.net/cDMlhSoeVZoL8ZdD8z-qOmzU-s9NdziOXY_5o9PKMSM" class="external">scanned notes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+</ul>
+</li>
+<li><a href="./resources/texts/Tractatus-Logico-Philosophicus" class="internal alias" data-slug="resources/texts/Tractatus-Logico-Philosophicus">Tractatus Logico-Philosophicus</a></li>
+</ul>
+<h2 id="presentations">Presentations<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#presentations" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<div class="gallery2">
+<div class="media-wrapper" style="margin-bottom:1rem;">
+<div class="media-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XZ9v8xSvvoc" title="Building Onchain Organizations" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+</div>
+<div class="media-wrapper" style="margin-bottom:1rem;">
+<div class="media-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LTM2NdSOx6U" title="Plausibly Permanent Syndication" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+<hr/>
+<div class="text-box" style="text-align:justify;position:relative;padding:1.5rem;hyphens:none;animation:fade-in 6s ease-in-out;background-color:var(--light);border:0px;">
+    <p style="text-align:justify;font-size:0.75rem;line-height:1.6;justify-content:center;hyphens:none;font-family:GeistMono;letter-spacing:1px;font-weight:200;">
+      <em>The atoms, as their own weight bears them down plumb through the void, at scarce determined times, in scarce determined places, from their course decline a little -- call it, so to speak, mere changed trend. For were it not their wont thuswise to swerve, down would they fall, each one, like drops of rain, through the unbottomed void; and then collisions ne'er could be nor blows among the primal elements; and thus nature would never have created aught.</em>
+    </p>
+    <p></p>
+    <p style="text-align:center;font-size:0.75rem;line-height:1.6;hyphens:none;font-family:GeistMono;letter-spacing:1px;font-weight:300;">
+      Lucretius, <em>On the Nature of Things</em>,
+      describing the phenomenon of clinamen.
+    </p>
+</div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul class="toc-content overflow" id="list-1"><li class="depth-0"><a href="#services" data-for="services">Services</a></li><li class="depth-0"><a href="#featured-writings" data-for="featured-writings">Featured Writings</a></li><li class="depth-0"><a href="#projects" data-for="projects">Projects</a></li><li class="depth-0"><a href="#reading-notes" data-for="reading-notes">Reading Notes</a></li><li class="depth-0"><a href="#presentations" data-for="presentations">Presentations</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-2" class="overflow"><li><a href="./" class="internal">Clinamenic LLC</a></li><li><a href="./zettelgarten/Notes-on-Experimental-Zettelkasten-Methodology" class="internal">Notes on Experimental Zettelkasten Methodology</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v1.0.0</a> © 2025</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script type="application/javascript">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="./postscript.js" type="module"></script></html>
